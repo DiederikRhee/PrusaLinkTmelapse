@@ -1,5 +1,6 @@
 import requests
 from datetime import datetime
+from dotenv import load_dotenv
 
 
 
@@ -33,7 +34,11 @@ def getSnap(ipadress, key):
             file.write(response.content)
 
 if __name__ == "__main__":
-    import json
-    with open("secrets.json", "r") as file:
-        settings = json.load(file)
-        getSnap(settings["ipadress"], settings["key"])
+    import os
+    from dotenv import load_dotenv
+    load_dotenv()
+
+    IP_ADDRESS = os.getenv("PRUSALINK_IP")
+    API_KEY = os.getenv("PRUSALINK_API_KEY")
+
+    getSnap(IP_ADDRESS, API_KEY)
